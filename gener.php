@@ -19,7 +19,8 @@ function generateLink($length = 4)
     return $shortUrl;
 }
 
-$shortUrl = generateLink(); //3 запись в бд
+$shortUrl = substr(uniqid(), -6); //3 запись в бд
+var_dump($shortUrl); die;
 
 //подключение к бд
 //db config
@@ -33,17 +34,18 @@ $password = '';
 //} catch (PDOException $e) {
 //    echo $e->getMessage();
 //}
+
 $db = new PDO('mysql:host=localhost;dbname=short_link', 'root', '');
-$sql = "INSERT INTO address (domain, url, short_url) VALUES (:firstPart, :secondPart. :short)";
+$sql = "INSERT INTO address (domain, url, short_url) VALUES (:firstPart, :secondPart, :short)";
 $stmt = $db->prepare($sql);
 
-$stmt->bindValue(':firstPart', $firstPartUrl);
-$stmt->bindValue(':secondPart', $secondPartUrl);
-$stmt->bindValue(':short', $shortUrl);
-$stmt->execute();
-
-
-var_dump($sql);
+$stmt->execute(
+    array(
+        ':firstPart' => $firstPartUrl,
+        ':secondPart' => $secondPartUrl,
+        ':short' => $shortUrl
+    )
+);
 //"INSERT INTO" . " $table "."(domain, url, short_url) VALUES ('" .$firstPartUrl."', '" .$secondPartUrl. "', '" .$shortUrl."')";
 //$result = $db->exec($stmt);
 
