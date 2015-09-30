@@ -33,8 +33,17 @@ $password = '';
 //} catch (PDOException $e) {
 //    echo $e->getMessage();
 //}
-$db = new PDO('mysql:host=localhost;dbname=address','root','');
-var_dump($stmt);
-    //"INSERT INTO" . " $table "."(domain, url, short_url) VALUES ('" .$firstPartUrl."', '" .$secondPartUrl. "', '" .$shortUrl."')";
-$result = $db->exec($stmt);
+$db = new PDO('mysql:host=localhost;dbname=short_link', 'root', '');
+$sql = "INSERT INTO address (domain, url, short_url) VALUES (:firstPart, :secondPart. :short)";
+$stmt = $db->prepare($sql);
+
+$stmt->bindValue(':firstPart', $firstPartUrl);
+$stmt->bindValue(':secondPart', $secondPartUrl);
+$stmt->bindValue(':short', $shortUrl);
+$stmt->execute();
+
+
+var_dump($sql);
+//"INSERT INTO" . " $table "."(domain, url, short_url) VALUES ('" .$firstPartUrl."', '" .$secondPartUrl. "', '" .$shortUrl."')";
+//$result = $db->exec($stmt);
 
