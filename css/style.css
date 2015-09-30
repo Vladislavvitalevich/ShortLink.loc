@@ -1,0 +1,11 @@
+body h2{
+    color: #32308b;
+}
+.position {
+    border: 1px;
+}
+
+.form {
+    border: 1px;
+    border-color: grey;
+}
