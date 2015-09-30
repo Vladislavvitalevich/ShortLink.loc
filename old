@@ -1,0 +1,19 @@
+1 Получаем аддрес через $_POST
+2 отжедяем часть которая после домена
+3 записываем домен в 1 переменную 2 часть во вторую сокращение в третью (в БД)
+4 возвращаем ...
+
+//Function_to_me
+//создание короткой ссылки
+function generateLink($length = 4)
+{
+    $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
+    $shortUrl = '';
+    for ($i = 0; $i < $length; $i++) {
+        $shortUrl .= substr($chars, rand(0, strlen($chars) - 1), 1);
+    }
+
+    return $shortUrl;
+}
+//
+//

@@ -9,15 +9,11 @@ $secondPartUrl = array_pop($url); //2 часть url
 
 
 $shortUrl = substr(uniqid(), -6); //3 запись в бд
-var_dump($shortUrl);
-die;
+//var_dump($shortUrl);
+//die;
 
 //подключение к бд
 //db config
-$host = 'localhost';
-$database = 'short_link';
-$login = 'root';
-$password = '';
 
 $db = new PDO('mysql:host=localhost;dbname=short_link', 'root', '');
 $sql = "INSERT INTO address (domain, url, short_url) VALUES (:firstPart, :secondPart, :short)";
