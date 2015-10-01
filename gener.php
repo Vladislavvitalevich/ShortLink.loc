@@ -7,7 +7,6 @@ $firstPartUrl = $url["host"]; //1 часть url
 //забираем последний элемент массива
 $secondPartUrl = array_pop($url); //2 часть url
 
-
 $shortUrl = substr(uniqid(), -6); //3 запись в бд
 //var_dump($shortUrl);
 //die;
@@ -26,5 +25,17 @@ $stmt->execute(
         ':short' => $shortUrl
     )
 );
+
+$sqlSelectAll = "SELECT * FROM address";
+$result = $db->query($sqlSelectAll);
+$result->bindColumn('id', $id);
+$result->bindColumn('domain', $newFirstUrl);
+$result->bindParam('url',$newSecondPartUrl);
+$result->bindColumn('short_url', $newShortUrl);
+$http = "https://";
+while ($result->fetch(PDO::FETCH_ASSOC)) {
+    echo " $id. <a href=$http$newFirstUrl$newSecondPartUrl>$newFirstUrl$newShortUrl</a><br>";
+}
+
 
 
